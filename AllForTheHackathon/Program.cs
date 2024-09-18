@@ -12,8 +12,12 @@ namespace AllForTheHackathon
             var host = Host.CreateDefaultBuilder(args).ConfigureServices(services =>
             {
                 services.AddTransient<ITeamBuildingStrategy, StrategyFromWiki>();
-                services.AddSingleton((s) => new Hackathon(Consts.FileWithJuniors, Consts.FileWithTeamLeads, s.GetRequiredService<ITeamBuildingStrategy>()));
-                services.AddSingleton((s) => new HRManager(s.GetRequiredService<Hackathon>()));
+                services.AddTransient<IWishlistsGenerator, RandomWishlistsGenerator>();
+                services.AddTransient<IRegistrar, RegistrarFromFiles>();
+                services.AddSingleton((s) => new Hackathon(Consts.FileWithJuniors, Consts.FileWithTeamLeads,
+                    s.GetRequiredService<ITeamBuildingStrategy>(), s.GetRequiredService<IRegistrar>()));
+                services.AddSingleton((s) => new HRManager(s.GetRequiredService<Hackathon>(),
+                    s.GetRequiredService<IWishlistsGenerator>()));
                 services.AddSingleton<HRDirector>();
 
             }).Build();
@@ -30,6 +34,7 @@ namespace AllForTheHackathon
                 Console.WriteLine(ex.Message);
                 return;
             }
+
             var hrDirector = host.Services.GetRequiredService<HRDirector>();
             List<Team> teams;
             for (int i = 0; i < Consts.NumberOfHackathons; i++)

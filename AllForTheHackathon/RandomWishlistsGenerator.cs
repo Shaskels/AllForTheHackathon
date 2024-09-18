@@ -3,11 +3,10 @@ using AllForTheHackathon.Employees;
 
 namespace AllForTheHackathon
 {
-    public class WishlistsGenerator
+    public class RandomWishlistsGenerator : IWishlistsGenerator
     {
-        public static void GetWishlists(List<Junior> juniors, List<TeamLead> teamLeads)
+        public void MakeWishlists(List<Junior> juniors, List<TeamLead> teamLeads)
         {
-
             for (int i = 0; i < Consts.NumberOfTeams; i++)
             {
                 var juniorsForShaffle = new List<Junior>(juniors);

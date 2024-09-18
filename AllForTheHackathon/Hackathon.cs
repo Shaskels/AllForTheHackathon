@@ -10,9 +10,9 @@ namespace AllForTheHackathon
 
         private ITeamBuildingStrategy _strategy;
 
-        public Hackathon(string fileNameWithJuniors, string fileNameWithTeamLeaders, ITeamBuildingStrategy strategy) 
+        public Hackathon(string fileNameWithJuniors, string fileNameWithTeamLeaders, ITeamBuildingStrategy strategy, IRegistrar registrar) 
         {
-            (Juniors, TeamLeads) = Registrar.RegisterParticipants(fileNameWithJuniors, fileNameWithTeamLeaders);
+            (Juniors, TeamLeads) = registrar.RegisterParticipants(fileNameWithJuniors, fileNameWithTeamLeaders);
             _strategy = strategy;
         }
 
