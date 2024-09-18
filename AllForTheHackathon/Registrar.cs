@@ -1,4 +1,6 @@
-﻿namespace AllForTheHackathon
+﻿using AllForTheHackathon.Employees;
+
+namespace AllForTheHackathon
 {
     public static class Registrar
     {
@@ -29,12 +31,9 @@
 
                 if (participants.Count != Consts.NumberOfTeams)
                 {
-                    Console.WriteLine("Fewer or more participants have been added then announced");
-                }
-                else
-                {
                     throw new RegistrationException("The number of Juniors and Teamleads must match the number of teams:" + Consts.NumberOfTeams);
                 }
+
 
                 textFile.Close();
             }

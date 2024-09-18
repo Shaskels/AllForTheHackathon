@@ -1,4 +1,6 @@
-﻿namespace AllForTheHackathon
+﻿using AllForTheHackathon.Employees;
+
+namespace AllForTheHackathon
 {
     public class StrategyFromWiki : ITeamBuildingStrategy
     {
@@ -57,7 +59,6 @@
             foreach (TeamLead candidate in JunData.Candidates)
             {
                 int index = junior.Wishlist.FindIndex(w => w.Id == candidate.Id);
-
                 if (index < currentBest)
                 {
                     TeamLeadsData? LeadData;
@@ -75,7 +76,6 @@
                     {
                         if (index == 0)
                         {
-
                             LeadData.answer = Answers.Yes;
                             _teamsSelected++;
                         }

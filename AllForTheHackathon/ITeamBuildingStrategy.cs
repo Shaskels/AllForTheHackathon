@@ -1,4 +1,6 @@
-﻿namespace AllForTheHackathon
+﻿using AllForTheHackathon.Employees;
+
+namespace AllForTheHackathon
 {
     public interface ITeamBuildingStrategy
     {

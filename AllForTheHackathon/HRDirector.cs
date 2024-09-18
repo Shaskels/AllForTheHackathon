@@ -16,8 +16,8 @@
                 sum = sum +  1.0 / team.SatisfactionOfTeamLeader;
                 sum = sum +  1.0 / team.SatisfactionOfJunior;
             }
-            _harmonicMeans.Add(teams.Count / sum);
-            return teams.Count / sum;
+            _harmonicMeans.Add(teams.Count * 2 / sum);
+            return teams.Count * 2 / sum;
         }
 
         public double CalculateTheAverageValue()

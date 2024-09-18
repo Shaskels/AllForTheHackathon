@@ -1,4 +1,4 @@
-﻿namespace AllForTheHackathon
+﻿namespace AllForTheHackathon.Employees
 {
     public class Employee
     {
@@ -14,7 +14,7 @@
         public override string ToString()
         {
 
-            return $"{Id.ToString(), -3}- {Name.ToString()}";
+            return $"{Id.ToString(),-3}- {Name.ToString()}";
         }
     }
 }
