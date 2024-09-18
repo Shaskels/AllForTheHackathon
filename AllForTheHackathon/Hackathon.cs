@@ -1,4 +1,5 @@
 ﻿using AllForTheHackathon.Employees;
+using AllForTheHackathon.Strategies;
 
 namespace AllForTheHackathon
 {
@@ -18,7 +19,7 @@ namespace AllForTheHackathon
 
         public List<Team> Hold()
         {
-            return _strategy.GetTeams(Juniors, TeamLeads);
+            return _strategy.BuildTeams(Juniors, TeamLeads);
         }
 
     }

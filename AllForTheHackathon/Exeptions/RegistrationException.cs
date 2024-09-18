@@ -1,4 +1,4 @@
-﻿namespace AllForTheHackathon
+﻿namespace AllForTheHackathon.Exeptions
 {
     public class RegistrationException : Exception
     {

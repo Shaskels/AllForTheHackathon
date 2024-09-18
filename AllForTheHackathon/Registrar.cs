@@ -1,4 +1,5 @@
 ﻿using AllForTheHackathon.Employees;
+using AllForTheHackathon.Exeptions;
 
 namespace AllForTheHackathon
 {

@@ -1,6 +1,6 @@
 ﻿using AllForTheHackathon.Employees;
 
-namespace AllForTheHackathon
+namespace AllForTheHackathon.Strategies
 {
     public class StrategyFromWiki : ITeamBuildingStrategy
     {
@@ -124,7 +124,7 @@ namespace AllForTheHackathon
                 _dictForLeads.Add(teamLeads[i].Id, teamLeadsData);
             }
         }
-        public List<Team> GetTeams(List<Junior> juniors, List<TeamLead> teamLeads)
+        public List<Team> BuildTeams(List<Junior> juniors, List<TeamLead> teamLeads)
         {
             _teamsSelected = 0;
 
@@ -149,7 +149,7 @@ namespace AllForTheHackathon
 
             }
 
-            return FormTeams(juniors,teamLeads);
+            return FormTeams(juniors, teamLeads);
 
         }
     }
