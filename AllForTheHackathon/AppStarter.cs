@@ -1,9 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using AllForTheHackathon.Strategies;
 
 namespace AllForTheHackathon
 {
-    public class AppStarter(HRDirector hrDirector, HRManager hrManager, IHost host) : IHostedService
+    public class AppStarter(HRDirector hrDirector, HRManager hrManager, ITeamBuildingStrategy strategy, IRegistrar registrar) : IHostedService
     {
         private bool _running = true;
         public Task StartAsync(CancellationToken cancellationToken)
@@ -14,9 +15,9 @@ namespace AllForTheHackathon
         public void RunAsync()
         {
             List<Team> teams;
-            for (int i = 0; i < Сonstants.NumberOfHackathons; i++)
+            for (int i = 0; i < Constants.NumberOfHackathons; i++)
             {
-                teams = hrManager.HoldAHackathon(host.Services.GetRequiredService<Hackathon>());
+                teams = hrManager.HoldAHackathon(new Hackathon(strategy,registrar));
                 Console.WriteLine("Hamonic Mean: " + hrDirector.CalculateTheHarmonicMean(teams));
                 Console.WriteLine();
             }
@@ -24,6 +25,5 @@ namespace AllForTheHackathon
         }
 
         public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;
-
     }
 }

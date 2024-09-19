@@ -1,6 +1,6 @@
 ﻿namespace AllForTheHackathon
 {
-    public static class Сonstants
+    public static class Constants
     {
         public const int NumberOfHackathons = 1000 ;
         public const int NumberOfTeams = 20;

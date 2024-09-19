@@ -11,8 +11,8 @@ namespace AllForTheHackathon
 
         public Hackathon(ITeamBuildingStrategy strategy, IRegistrar registrar) 
         {
-            Juniors = registrar.RegisterParticipants<Junior>(AllForTheHackathon.Сonstants.FileWithJuniors);
-            TeamLeads = registrar.RegisterParticipants<TeamLead>(AllForTheHackathon.Сonstants.FileWithTeamLeads);
+            Juniors = registrar.RegisterParticipants<Junior>(AllForTheHackathon.Constants.FileWithJuniors);
+            TeamLeads = registrar.RegisterParticipants<TeamLead>(AllForTheHackathon.Constants.FileWithTeamLeads);
             _strategy = strategy;
         }
 

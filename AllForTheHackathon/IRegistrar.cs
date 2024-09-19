@@ -1,6 +1,4 @@
-﻿using AllForTheHackathon.Employees;
-
-namespace AllForTheHackathon
+﻿namespace AllForTheHackathon
 {
     public interface IRegistrar
     {

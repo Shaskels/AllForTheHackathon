@@ -9,7 +9,7 @@ namespace AllForTheHackathon
         {
             var juniorsForShaffle = new List<Junior>(juniors);
             var teamLeadersForShaffle = new List<TeamLead>(teamLeads);
-            for (int i = 0; i < Сonstants.NumberOfTeams; i++)
+            for (int i = 0; i < Constants.NumberOfTeams; i++)
             {
                 Random.Shared.Shuffle(CollectionsMarshal.AsSpan(juniorsForShaffle));
                 Random.Shared.Shuffle(CollectionsMarshal.AsSpan(teamLeadersForShaffle));

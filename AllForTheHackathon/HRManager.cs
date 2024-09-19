@@ -1,6 +1,4 @@
 ﻿using AllForTheHackathon.Strategies;
-using System.Runtime.InteropServices;
-
 namespace AllForTheHackathon
 {
     public class HRManager

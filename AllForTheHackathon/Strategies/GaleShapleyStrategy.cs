@@ -16,7 +16,7 @@ namespace AllForTheHackathon.Strategies
 
             public JuniorsData(TeamLead favorite)
             {
-                IndOfBests = Сonstants.NumberOfTeams;
+                IndOfBests = Constants.NumberOfTeams;
                 Favorite = favorite;
             }
         }
@@ -28,7 +28,7 @@ namespace AllForTheHackathon.Strategies
 
             public TeamLeadsData()
             {
-                for (int i = 0; i < Сonstants.NumberOfTeams; i++)
+                for (int i = 0; i < Constants.NumberOfTeams; i++)
                 {
                     answer = Answers.No;
                     IndOfBests = -1;
@@ -38,7 +38,7 @@ namespace AllForTheHackathon.Strategies
 
         private void MakeSuggestions(List<TeamLead> teamLeads)
         {
-            for (int j = 0; j < Сonstants.NumberOfTeams; j++)
+            for (int j = 0; j < Constants.NumberOfTeams; j++)
             {
                 bool res = _dictForLeads.TryGetValue(teamLeads[j].Id, out TeamLeadsData? LeadData);
                 if (res && LeadData?.answer == Answers.No)
@@ -61,7 +61,7 @@ namespace AllForTheHackathon.Strategies
                 if (index < currentBest)
                 {
                     TeamLeadsData? LeadData;
-                    if (currentBest != Сonstants.NumberOfTeams)
+                    if (currentBest != Constants.NumberOfTeams)
                     {
                         if (_dictForLeads.TryGetValue(junior.Wishlist[currentBest].Id, out LeadData))
                         {
@@ -93,14 +93,14 @@ namespace AllForTheHackathon.Strategies
         private List<Team> FormTeams(List<Junior> juniors, List<TeamLead> teamLeads)
         {
             var teams = new List<Team>();
-            for (int i = 0; i < Сonstants.NumberOfTeams; i++)
+            for (int i = 0; i < Constants.NumberOfTeams; i++)
             {
                 if (_dictForJuns.TryGetValue(juniors[i].Id, out JuniorsData? JunData))
                 {
                     if (_dictForLeads.TryGetValue(teamLeads[JunData.IndOfBests].Id, out TeamLeadsData? LeadData))
                     {
-                        var team = new Team(juniors[i], Сonstants.NumberOfTeams - JunData.IndOfBests, JunData.Favorite
-                            , Сonstants.NumberOfTeams - LeadData.IndOfBests);
+                        var team = new Team(juniors[i], Constants.NumberOfTeams - JunData.IndOfBests, JunData.Favorite
+                            , Constants.NumberOfTeams - LeadData.IndOfBests);
                         teams.Add(team);
                         Console.WriteLine(team);
                     }
@@ -111,9 +111,11 @@ namespace AllForTheHackathon.Strategies
 
         private void FillDictionaries(List<Junior> juniors, List<TeamLead> teamLeads)
         {
-            for (int i = 0; i < Сonstants.NumberOfTeams; i++)
+            _dictForJuns.Clear();
+            _dictForLeads.Clear();
+            for (int i = 0; i < Constants.NumberOfTeams; i++)
             {
-                var juniorsData = new JuniorsData(juniors[i].Wishlist[Сonstants.NumberOfTeams - 1]);
+                var juniorsData = new JuniorsData(juniors[i].Wishlist[Constants.NumberOfTeams - 1]);
                 var teamLeadsData = new TeamLeadsData();
                 _dictForJuns.Add(juniors[i].Id, juniorsData);
                 _dictForLeads.Add(teamLeads[i].Id, teamLeadsData);
@@ -122,11 +124,12 @@ namespace AllForTheHackathon.Strategies
 
         public List<Team> BuildTeams(List<Junior> juniors, List<TeamLead> teamLeads)
         {
+            _teamsSelected = 0;
             FillDictionaries(juniors, teamLeads);
-            for (int i = 0; _teamsSelected < Сonstants.NumberOfTeams; i++)
+            for (int i = 0; _teamsSelected < Constants.NumberOfTeams; i++)
             {
                 MakeSuggestions(teamLeads);
-                for (int j = 0; j < Сonstants.NumberOfTeams; j++)
+                for (int j = 0; j < Constants.NumberOfTeams; j++)
                 {
                     if (_dictForJuns.TryGetValue(juniors[j].Id, out JuniorsData? JunData))
                     {

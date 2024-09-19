@@ -29,9 +29,9 @@ namespace AllForTheHackathon
                         }
                     }
                 }
-                if (participants.Count != Сonstants.NumberOfTeams)
+                if (participants.Count != Constants.NumberOfTeams)
                 {
-                    throw new RegistrationException("The number of Juniors and Teamleads must match the number of teams:" + Сonstants.NumberOfTeams);
+                    throw new RegistrationException("The number of Juniors and Teamleads must match the number of teams:" + Constants.NumberOfTeams);
                 }
             }
         }
