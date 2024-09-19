@@ -3,7 +3,7 @@ using AllForTheHackathon.Exeptions;
 
 namespace AllForTheHackathon
 {
-    public class RegistrarFromFiles : IRegistrar
+    public class RegistrarFromCSVFiles : IRegistrar
     {
         private void Register<T>(string file, List<T> participants)
         {
@@ -32,23 +32,19 @@ namespace AllForTheHackathon
 
                 }
 
-                if (participants.Count != Consts.NumberOfTeams)
+                if (participants.Count != Сonstants.NumberOfTeams)
                 {
-                    throw new RegistrationException("The number of Juniors and Teamleads must match the number of teams:" + Consts.NumberOfTeams);
+                    throw new RegistrationException("The number of Juniors and Teamleads must match the number of teams:" + Сonstants.NumberOfTeams);
                 }
 
             }
         }
 
-        public (List<Junior>, List<TeamLead>) RegisterParticipants(string fileNameWithJuniors, string fileNameWithTeamLeaders)
+        public List<T> RegisterParticipants<T>(string fileName)
         {
-            List<Junior> Juniors = new List<Junior>();
-            List<TeamLead> TeamLeads = new List<TeamLead>();
-            Register<Junior>(fileNameWithJuniors, Juniors);
-            Register<TeamLead>(fileNameWithTeamLeaders, TeamLeads);
-            Console.WriteLine(Juniors.ToString());
-            Console.WriteLine(TeamLeads.ToString());
-            return (Juniors, TeamLeads);
+            List<T> participants = new List<T>();
+            Register<T>(fileName, participants);
+            return participants;
         }
     }
 }

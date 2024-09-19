@@ -1,22 +1,20 @@
-﻿using System.Runtime.InteropServices;
+﻿using AllForTheHackathon.Strategies;
+using System.Runtime.InteropServices;
 
 namespace AllForTheHackathon
 {
     public class HRManager
     {
-        private Hackathon _hackathon;
         private IWishlistsGenerator _wishlistsGenerator;
-        public HRManager(Hackathon hackathon, IWishlistsGenerator wishlistsGenerator)
+        public HRManager(IWishlistsGenerator wishlistsGenerator)
         {
-            _hackathon = hackathon;
             _wishlistsGenerator = wishlistsGenerator;
-
         }
 
-        public List<Team> HoldAHackathon()
+        public List<Team> HoldAHackathon(Hackathon hackathon)
         {
-            _wishlistsGenerator.MakeWishlists(_hackathon.Juniors, _hackathon.TeamLeads);
-            return _hackathon.Hold();
+            _wishlistsGenerator.MakeWishlists(hackathon.Juniors, hackathon.TeamLeads);
+            return hackathon.Hold();
         }
 
     }

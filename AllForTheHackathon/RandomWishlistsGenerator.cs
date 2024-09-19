@@ -7,7 +7,7 @@ namespace AllForTheHackathon
     {
         public void MakeWishlists(List<Junior> juniors, List<TeamLead> teamLeads)
         {
-            for (int i = 0; i < Consts.NumberOfTeams; i++)
+            for (int i = 0; i < Сonstants.NumberOfTeams; i++)
             {
                 var juniorsForShaffle = new List<Junior>(juniors);
                 var teamLeadersForShaffle = new List<TeamLead>(teamLeads);
