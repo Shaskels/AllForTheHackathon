@@ -4,10 +4,10 @@ namespace AllForTheHackathon
 {
     public class Team
     {
-        public Junior Junior { get; set; }
-        public int SatisfactionOfJunior { get; set; }
-        public TeamLead TeamLeader { get; set; }
-        public int SatisfactionOfTeamLeader { get; set; }
+        public Junior Junior { get; private set; }
+        public int SatisfactionOfJunior { get; private set; }
+        public TeamLead TeamLeader { get; private set; }
+        public int SatisfactionOfTeamLeader { get; private set; }
 
         public Team(Junior junior, int satisfactionOfJunior, TeamLead teamLeader, int satisfactionOfTeamLeader)
         {
