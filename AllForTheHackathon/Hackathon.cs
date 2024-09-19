@@ -20,6 +20,5 @@ namespace AllForTheHackathon
         {
             return _strategy.BuildTeams(Juniors, TeamLeads);
         }
-
     }
 }
