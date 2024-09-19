@@ -16,6 +16,5 @@ namespace AllForTheHackathon
             _wishlistsGenerator.MakeWishlists(hackathon.Juniors, hackathon.TeamLeads);
             return hackathon.Hold();
         }
-
     }
 }

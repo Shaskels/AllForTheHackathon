@@ -9,7 +9,6 @@ namespace AllForTheHackathon
         public TeamLead TeamLeader { get; set; }
         public int SatisfactionOfTeamLeader { get; set; }
 
-
         public Team(Junior junior, int satisfactionOfJunior, TeamLead teamLeader, int satisfactionOfTeamLeader)
         {
             Junior = junior;

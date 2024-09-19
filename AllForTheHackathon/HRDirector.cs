@@ -28,7 +28,6 @@
                 sum += mean;
             }
             return sum / _harmonicMeans.Count;
-
         }
     }
 }

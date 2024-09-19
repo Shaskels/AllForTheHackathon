@@ -2,7 +2,7 @@
 {
     public class TeamLead : Employee
     {
-        public List<Junior> Wishlist { get; set; } = new List<Junior>();
+        public List<Junior> Wishlist { get; private set; } = new List<Junior>();
         public TeamLead(int id, string name) : base(id, name)
         {
         }

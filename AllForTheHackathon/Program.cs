@@ -14,15 +14,11 @@ namespace AllForTheHackathon
                 services.AddTransient<ITeamBuildingStrategy, GaleShapleyStrategy>();
                 services.AddSingleton<IWishlistsGenerator, RandomWishlistsGenerator>();
                 services.AddSingleton<IRegistrar, RegistrarFromCSVFiles>();
-                services.AddTransient((s) => new Hackathon(s.GetRequiredService<ITeamBuildingStrategy>(), 
-                    s.GetRequiredService<IRegistrar>()));
-                services.AddSingleton((s) => new HRManager(s.GetRequiredService<IWishlistsGenerator>()));
+                services.AddTransient<Hackathon>();
+                services.AddSingleton<HRManager>();
                 services.AddSingleton<HRDirector>();
             }).Build();
-
             host.Run();
-
-
         }
     }
 }

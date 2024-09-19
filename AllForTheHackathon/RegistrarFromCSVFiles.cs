@@ -1,5 +1,4 @@
-﻿using AllForTheHackathon.Employees;
-using AllForTheHackathon.Exeptions;
+﻿using AllForTheHackathon.Exсeptions;
 
 namespace AllForTheHackathon
 {
@@ -29,14 +28,11 @@ namespace AllForTheHackathon
                             throw new RegistrationException("The employee Id must be a number and must not be empty");
                         }
                     }
-
                 }
-
                 if (participants.Count != Сonstants.NumberOfTeams)
                 {
                     throw new RegistrationException("The number of Juniors and Teamleads must match the number of teams:" + Сonstants.NumberOfTeams);
                 }
-
             }
         }
 
