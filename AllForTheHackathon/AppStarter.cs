@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using AllForTheHackathon.Strategies;
+﻿using Microsoft.Extensions.Hosting;
 using AllForTheHackathon.Exсeptions;
 using AllForTheHackathon.Employees;
 

@@ -111,9 +111,9 @@ namespace AllForTheHackathon.Strategies
         {
             _dictForJuns.Clear();
             _dictForLeads.Clear();
-            for (int i = 0; i < Constants.NumberOfTeams; i++)
+            for (int i = 0; i < juniors.Count; i++)
             {
-                var juniorsData = new JuniorsData(juniors[i].Wishlist[Constants.NumberOfTeams - 1]);
+                var juniorsData = new JuniorsData(juniors[i].Wishlist[juniors.Count - 1]);
                 var teamLeadsData = new TeamLeadsData();
                 _dictForJuns.Add(juniors[i].Id, juniorsData);
                 _dictForLeads.Add(teamLeads[i].Id, teamLeadsData);
