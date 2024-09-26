@@ -6,5 +6,9 @@
         public TeamLead(int id, string name) : base(id, name)
         {
         }
+        public TeamLead(int id, string name, List<Junior> juniors) : base(id, name)
+        {
+            Wishlist = juniors;
+        }
     }
 }

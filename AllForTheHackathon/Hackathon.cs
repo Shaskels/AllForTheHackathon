@@ -7,18 +7,16 @@ namespace AllForTheHackathon
     {
         public List<Junior> Juniors { get; private set; }
         public List<TeamLead> TeamLeads { get; private set; }
-        private ITeamBuildingStrategy _strategy;
 
-        public Hackathon(ITeamBuildingStrategy strategy, IRegistrar registrar) 
+        public Hackathon(List<Junior> juniors, List<TeamLead> teamLeads) 
         {
-            Juniors = registrar.RegisterParticipants<Junior>(AllForTheHackathon.Constants.FileWithJuniors);
-            TeamLeads = registrar.RegisterParticipants<TeamLead>(AllForTheHackathon.Constants.FileWithTeamLeads);
-            _strategy = strategy;
+            Juniors = juniors;
+            TeamLeads = teamLeads;
         }
 
-        public List<Team> Hold()
+        public List<Team> Hold(ITeamBuildingStrategy strategy)
         {
-            return _strategy.BuildTeams(Juniors, TeamLeads);
+            return strategy.BuildTeams(Juniors, TeamLeads);
         }
     }
 }

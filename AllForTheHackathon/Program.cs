@@ -11,7 +11,7 @@ namespace AllForTheHackathon
             var host = Host.CreateDefaultBuilder(args).ConfigureServices(services =>
             {
                 services.AddHostedService<AppStarter>();
-                services.AddTransient<ITeamBuildingStrategy, GaleShapleyStrategy>();
+                services.AddSingleton<ITeamBuildingStrategy, GaleShapleyStrategy>();
                 services.AddSingleton<IWishlistsGenerator, RandomWishlistsGenerator>();
                 services.AddSingleton<IRegistrar, RegistrarFromCSVFiles>();
                 services.AddTransient<Hackathon>();

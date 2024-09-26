@@ -13,8 +13,8 @@ namespace AllForTheHackathon
             {
                 Random.Shared.Shuffle(CollectionsMarshal.AsSpan(juniorsForShaffle));
                 Random.Shared.Shuffle(CollectionsMarshal.AsSpan(teamLeadersForShaffle));
-                teamLeads[i].Wishlist.InsertRange(0,juniorsForShaffle);
-                juniors[i].Wishlist.InsertRange(0,teamLeadersForShaffle);
+                teamLeads[i].Wishlist.InsertRange(0, juniorsForShaffle);
+                juniors[i].Wishlist.InsertRange(0, teamLeadersForShaffle);
             }
         }
     }

@@ -14,5 +14,15 @@
         {
             return $"{Id.ToString(),-3}- {Name.ToString()}";
         }
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as Employee);
+        }
+        public bool Equals(Employee other)
+        {
+            if (other != null && Id == other.Id && Name == other.Name)
+                return true;
+            return false;
+        }
     }
 }

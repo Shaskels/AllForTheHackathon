@@ -4,15 +4,17 @@ namespace AllForTheHackathon
     public class HRManager
     {
         private IWishlistsGenerator _wishlistsGenerator;
-        public HRManager(IWishlistsGenerator wishlistsGenerator)
+        private ITeamBuildingStrategy _buildingStrategy;
+        public HRManager(ITeamBuildingStrategy strategy, IWishlistsGenerator wishlistsGenerator)
         {
             _wishlistsGenerator = wishlistsGenerator;
+            _buildingStrategy = strategy;
         }
 
         public List<Team> HoldAHackathon(Hackathon hackathon)
         {
             _wishlistsGenerator.MakeWishlists(hackathon.Juniors, hackathon.TeamLeads);
-            return hackathon.Hold();
+            return hackathon.Hold(_buildingStrategy);
         }
     }
 }

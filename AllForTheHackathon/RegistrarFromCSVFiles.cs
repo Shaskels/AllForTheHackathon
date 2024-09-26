@@ -6,9 +6,9 @@ namespace AllForTheHackathon
     {
         private void Register<T>(string file, List<T> participants)
         {
-            if (File.Exists(@"..\..\..\" + file))
+            if (File.Exists(file))
             {
-                using (StreamReader textFile = new StreamReader(@"..\..\..\" + file))
+                using (StreamReader textFile = new StreamReader(file))
                 {
                     string? line = textFile.ReadLine();
                     while ((line = textFile.ReadLine()) != null)
@@ -25,13 +25,13 @@ namespace AllForTheHackathon
                         }
                         else
                         {
-                            throw new RegistrationException("The employee Id must be a number and must not be empty");
+                            IsRegistrationSuccess.IsSuccess = false;
                         }
                     }
                 }
                 if (participants.Count != Constants.NumberOfTeams)
                 {
-                    throw new RegistrationException("The number of Juniors and Teamleads must match the number of teams:" + Constants.NumberOfTeams);
+                    IsRegistrationSuccess.IsSuccess = false;
                 }
             }
         }

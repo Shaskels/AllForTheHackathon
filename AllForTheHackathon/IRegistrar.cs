@@ -2,6 +2,6 @@
 {
     public interface IRegistrar
     {
-        public List<T> RegisterParticipants<T>(string fileNameWithJuniors);
+        public List<T> RegisterParticipants<T>(string fileName);
     }
 }

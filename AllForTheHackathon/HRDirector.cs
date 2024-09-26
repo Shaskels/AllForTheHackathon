@@ -2,28 +2,28 @@
 {
     public class HRDirector
     {
-        private List<double> _harmonicMeans;
+        private List<decimal> _harmonicMeans;
         public HRDirector()
         {
-            _harmonicMeans = new List<double>();
+            _harmonicMeans = new List<decimal>();
         }
 
-        public double CalculateTheHarmonicMean(List<Team> teams)
+        public decimal CalculateTheHarmonicMean(List<Team> teams)
         {
-            double sum = 0.0;
+            decimal sum = 0.0M;
             foreach (Team team in teams)
             {
-                sum = sum +  1.0 / team.SatisfactionOfTeamLeader;
-                sum = sum +  1.0 / team.SatisfactionOfJunior;
+                sum = sum +  1.0M / team.SatisfactionOfTeamLeader;
+                sum = sum +  1.0M / team.SatisfactionOfJunior;
             }
             _harmonicMeans.Add(teams.Count * 2 / sum);
             return teams.Count * 2 / sum;
         }
 
-        public double CalculateTheAverageValue()
+        public decimal CalculateTheAverageValue()
         {
-            double sum = 0.0;
-            foreach (double mean in _harmonicMeans)
+            decimal sum = 0.0M;
+            foreach (decimal mean in _harmonicMeans)
             {
                 sum += mean;
             }

@@ -4,11 +4,13 @@ namespace AllForTheHackathon
 {
     public class Wishlist
     {
-        public List<Employee> wishlist { get; set; }
+        public int Id { get; private set; }
+        public List<int> Employees { get; private set; }
 
-        public Wishlist(List<Employee> wishlist) 
+        public Wishlist(int id, List<int> employees) 
         {
-            this.wishlist = wishlist;
+            Id = id;
+            Employees = employees;
         }
     }
 }
