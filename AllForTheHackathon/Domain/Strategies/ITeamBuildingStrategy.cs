@@ -1,6 +1,6 @@
-﻿using AllForTheHackathon.Employees;
+﻿using AllForTheHackathon.Domain.Employees;
 
-namespace AllForTheHackathon.Strategies
+namespace AllForTheHackathon.Domain.Strategies
 {
     public interface ITeamBuildingStrategy
     {

@@ -1,4 +1,4 @@
-﻿namespace AllForTheHackathon
+﻿namespace AllForTheHackathon.Domain
 {
     public class HRDirector
     {
@@ -13,8 +13,8 @@
             decimal sum = 0.0M;
             foreach (Team team in teams)
             {
-                sum = sum +  1.0M / team.SatisfactionOfTeamLeader;
-                sum = sum +  1.0M / team.SatisfactionOfJunior;
+                sum = sum + 1.0M / team.SatisfactionOfTeamLeader;
+                sum = sum + 1.0M / team.SatisfactionOfJunior;
             }
             _harmonicMeans.Add(teams.Count * 2 / sum);
             return teams.Count * 2 / sum;

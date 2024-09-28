@@ -1,4 +1,4 @@
-﻿namespace AllForTheHackathon.Employees
+﻿namespace AllForTheHackathon.Domain.Employees
 {
     public class Junior : Employee
     {

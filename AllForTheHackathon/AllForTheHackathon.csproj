@@ -12,10 +12,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Juniors20.csv">
+    <None Update="Resources\appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Teamleads20.csv">
+    <None Update="Resources\Juniors20.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Teamleads20.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

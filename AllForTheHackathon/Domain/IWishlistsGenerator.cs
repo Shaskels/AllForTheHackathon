@@ -1,6 +1,6 @@
-﻿using AllForTheHackathon.Employees;
+﻿using AllForTheHackathon.Domain.Employees;
 
-namespace AllForTheHackathon
+namespace AllForTheHackathon.Domain
 {
     public interface IWishlistsGenerator
     {

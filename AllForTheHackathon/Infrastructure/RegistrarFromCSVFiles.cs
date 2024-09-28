@@ -1,14 +1,21 @@
-﻿using AllForTheHackathon.Exсeptions;
+﻿using AllForTheHackathon.Domain;
+using AllForTheHackathon.Infrastructure.IsSuccess;
+using Microsoft.Extensions.Options;
 
-namespace AllForTheHackathon
+namespace AllForTheHackathon.Infrastructure
 {
     public class RegistrarFromCSVFiles : IRegistrar
     {
+        private Constants _constants;
+        public RegistrarFromCSVFiles(IOptions<Constants> consts)
+        {
+            _constants = consts.Value;
+        }
         private void Register<T>(string file, List<T> participants)
         {
-            if (File.Exists(file))
+            if (File.Exists("./Resources/" + file))
             {
-                using (StreamReader textFile = new StreamReader(file))
+                using (StreamReader textFile = new StreamReader("./Resources/" + file))
                 {
                     string? line = textFile.ReadLine();
                     while ((line = textFile.ReadLine()) != null)
@@ -29,7 +36,7 @@ namespace AllForTheHackathon
                         }
                     }
                 }
-                if (participants.Count != Constants.NumberOfTeams)
+                if (participants.Count != _constants.NumberOfTeams)
                 {
                     IsRegistrationSuccess.IsSuccess = false;
                 }
@@ -39,7 +46,7 @@ namespace AllForTheHackathon
         public List<T> RegisterParticipants<T>(string fileName)
         {
             List<T> participants = new List<T>();
-            Register<T>(fileName, participants);
+            Register(fileName, participants);
             return participants;
         }
     }

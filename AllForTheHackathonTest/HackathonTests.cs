@@ -1,6 +1,6 @@
-﻿using AllForTheHackathon;
-using AllForTheHackathon.Employees;
-using AllForTheHackathon.Strategies;
+﻿using AllForTheHackathon.Domain;
+using AllForTheHackathon.Domain.Employees;
+using AllForTheHackathon.Domain.Strategies;
 
 namespace AllForTheHackathonTests
 {
@@ -99,12 +99,17 @@ namespace AllForTheHackathonTests
         [MemberData(nameof(Data))]
         public void Hold_HarmonicMeanShouldMatchExpected(List<Junior> juniors, List<TeamLead> teamLeads, decimal expected)
         {
+            //Arrange
             Hackathon hackathon = new Hackathon(juniors, teamLeads);
             ITeamBuildingStrategy buildingStrategy = new GaleShapleyStrategy();
             List<Team> teams = hackathon.Hold(buildingStrategy);
             HRDirector hRDirector = new HRDirector();
+
+            //Act
             var res = hRDirector.CalculateTheHarmonicMean(teams);
-            Assert.Equal(expected, Math.Round(res,4));
+
+            //Assert
+            Assert.Equal(expected, Math.Round(res, 4));
         }
     }
 }

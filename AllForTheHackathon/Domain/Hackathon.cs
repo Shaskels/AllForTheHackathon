@@ -1,14 +1,14 @@
-﻿using AllForTheHackathon.Employees;
-using AllForTheHackathon.Strategies;
+﻿using AllForTheHackathon.Domain.Employees;
+using AllForTheHackathon.Domain.Strategies;
 
-namespace AllForTheHackathon
+namespace AllForTheHackathon.Domain
 {
     public class Hackathon
     {
         public List<Junior> Juniors { get; private set; }
         public List<TeamLead> TeamLeads { get; private set; }
 
-        public Hackathon(List<Junior> juniors, List<TeamLead> teamLeads) 
+        public Hackathon(List<Junior> juniors, List<TeamLead> teamLeads)
         {
             Juniors = juniors;
             TeamLeads = teamLeads;

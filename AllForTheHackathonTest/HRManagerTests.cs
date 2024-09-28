@@ -1,6 +1,6 @@
-﻿using AllForTheHackathon;
-using AllForTheHackathon.Employees;
-using AllForTheHackathon.Strategies;
+﻿using AllForTheHackathon.Domain;
+using AllForTheHackathon.Domain.Employees;
+using AllForTheHackathon.Domain.Strategies;
 using Moq;
 
 namespace AllForTheHackathonTests
@@ -124,27 +124,36 @@ namespace AllForTheHackathonTests
                                             }
             };
         }
+
         [Theory]
         [MemberData(nameof(DataForFirstTest))]
         public void HoldAHackathon_NumberOfTeamsShoultMatchPresetValue(List<Junior> juniors, List<TeamLead> teamLeads, int expectedNumberOfTeams)
         {
+            //Arrange
             HRManager hRManager = new HRManager(strategy, generator);
-
             Hackathon hackathon = new Hackathon(juniors, teamLeads);
+
+            //Act
             List<Team> teams = hRManager.HoldAHackathon(hackathon);
 
+            //Assert
             Assert.Equal(expectedNumberOfTeams, teams.Count);
         }
 
         [Fact]
         public void HoldAHackathon_StrategyShouldBeCalledOnce()
         {
+            //Arrange
             Hackathon hackathon = new Hackathon(new List<Junior> { new Junior(1, "Acтафьев Андрей"), }
             , new List<TeamLead> { new TeamLead(1, "Костин Александр") });
             var mock = new Mock<ITeamBuildingStrategy>();
             mock.Setup(s => s.BuildTeams(hackathon.Juniors, hackathon.TeamLeads)).Returns(GetTestTeams());
             HRManager hRManager = new HRManager(mock.Object, generator);
+
+            //Act
             hRManager.HoldAHackathon(hackathon);
+
+            //Assert
             mock.Verify(s => s.BuildTeams(hackathon.Juniors, hackathon.TeamLeads), Times.Once);
 
         }
@@ -161,8 +170,13 @@ namespace AllForTheHackathonTests
         [MemberData(nameof(DataForSecondTest))]
         public void HoldAHackathon_TeamListShouldMathTeamWithPresetValue(List<Junior> juniors, List<TeamLead> teamLeads, List<Team> expectedTeams)
         {
+            //Arrange
             Hackathon hackathon = new Hackathon(juniors, teamLeads);
+
+            //Act
             List<Team> teams = hackathon.Hold(strategy);
+
+            //Assert
             Assert.Equal(expectedTeams, teams);
         }
     }

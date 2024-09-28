@@ -1,4 +1,4 @@
-﻿namespace AllForTheHackathon.Employees
+﻿namespace AllForTheHackathon.Domain.Employees
 {
     public class Employee
     {
@@ -10,14 +10,17 @@
             Id = id;
             Name = name;
         }
+
         public override string ToString()
         {
             return $"{Id.ToString(),-3}- {Name.ToString()}";
         }
+
         public override bool Equals(object obj)
         {
             return Equals(obj as Employee);
         }
+
         public bool Equals(Employee other)
         {
             if (other != null && Id == other.Id && Name == other.Name)

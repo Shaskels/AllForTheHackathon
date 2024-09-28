@@ -1,12 +1,14 @@
-﻿using AllForTheHackathon.Employees;
+﻿using AllForTheHackathon.Domain.Employees;
+using Microsoft.Extensions.Options;
 
-namespace AllForTheHackathon.Strategies
+namespace AllForTheHackathon.Domain.Strategies
 {
     public class GaleShapleyStrategy : ITeamBuildingStrategy
     {
         private Dictionary<int, JuniorsData> _dictForJuns = new Dictionary<int, JuniorsData>();
         private Dictionary<int, TeamLeadsData> _dictForLeads = new Dictionary<int, TeamLeadsData>();
         private int _teamsSelected = 0;
+        private int _teamLeadsNumber = 0;
 
         private class JuniorsData
         {
@@ -14,9 +16,9 @@ namespace AllForTheHackathon.Strategies
             public List<TeamLead> Candidates { get; set; } = new List<TeamLead>();
             public int IndOfBests { get; set; }
 
-            public JuniorsData(TeamLead favorite)
+            public JuniorsData(TeamLead favorite, int numberOfLeads)
             {
-                IndOfBests = Constants.NumberOfTeams;
+                IndOfBests = numberOfLeads;
                 Favorite = favorite;
             }
         }
@@ -29,7 +31,7 @@ namespace AllForTheHackathon.Strategies
             public TeamLeadsData()
             {
                 answer = Answers.No;
-                IndOfBests = -1;  
+                IndOfBests = -1;
             }
         }
 
@@ -58,7 +60,7 @@ namespace AllForTheHackathon.Strategies
                 if (index < currentBest)
                 {
                     TeamLeadsData? LeadData;
-                    if (currentBest != Constants.NumberOfTeams)
+                    if (currentBest != _teamLeadsNumber)
                     {
                         if (_dictForLeads.TryGetValue(junior.Wishlist[currentBest].Id, out LeadData))
                         {
@@ -96,8 +98,8 @@ namespace AllForTheHackathon.Strategies
                 {
                     if (_dictForLeads.TryGetValue(teamLeads[JunData.IndOfBests].Id, out TeamLeadsData? LeadData))
                     {
-                        var team = new Team(junior, 
-                            juniors.Count - JunData.IndOfBests, 
+                        var team = new Team(junior,
+                            juniors.Count - JunData.IndOfBests,
                             JunData.Favorite,
                             juniors.Count - LeadData.IndOfBests);
                         teams.Add(team);
@@ -113,7 +115,7 @@ namespace AllForTheHackathon.Strategies
             _dictForLeads.Clear();
             for (int i = 0; i < juniors.Count; i++)
             {
-                var juniorsData = new JuniorsData(juniors[i].Wishlist[juniors.Count - 1]);
+                var juniorsData = new JuniorsData(juniors[i].Wishlist[juniors.Count - 1], _teamLeadsNumber);
                 var teamLeadsData = new TeamLeadsData();
                 _dictForJuns.Add(juniors[i].Id, juniorsData);
                 _dictForLeads.Add(teamLeads[i].Id, teamLeadsData);
@@ -123,6 +125,7 @@ namespace AllForTheHackathon.Strategies
         public List<Team> BuildTeams(List<Junior> juniors, List<TeamLead> teamLeads)
         {
             _teamsSelected = 0;
+            _teamLeadsNumber = juniors.Count;
             FillDictionaries(juniors, teamLeads);
             for (int i = 0; _teamsSelected < juniors.Count; i++)
             {

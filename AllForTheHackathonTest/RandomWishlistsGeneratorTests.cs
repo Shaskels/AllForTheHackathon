@@ -1,5 +1,6 @@
 using AllForTheHackathon;
-using AllForTheHackathon.Employees;
+using AllForTheHackathon.Domain;
+using AllForTheHackathon.Domain.Employees;
 
 namespace AllForTheHackathonTest
 {
@@ -41,10 +42,14 @@ namespace AllForTheHackathonTest
         [MemberData(nameof(DataForFirstTest))]
         public void MakeWishlists_SizeOfTheListShouldMatchTheNumberOfTeamMembers(List<Junior> _juniors, List<TeamLead> _teamLeads)
         {
+            //Arrange
+
+            //Act
             wishlistsGenerator.MakeWishlists(_juniors, _teamLeads);
+
+            //Assert
             int expectedJuniorsCount = _juniors.Count;
             int expectedTeamLeadsCount = _teamLeads.Count;
-
             foreach (Junior junior in _juniors)
             {
                 Assert.Equal(expectedTeamLeadsCount, junior.Wishlist.Count);
@@ -59,8 +64,12 @@ namespace AllForTheHackathonTest
         [MemberData(nameof(DataForSecondTest))]
         public void MakeWishlists_JuniorShouldBeInTheTeamLeadsLists(Junior junior, List<Junior> _juniors, List<TeamLead> _teamLeads)
         {
+            //Arrange
+
+            //Act
             wishlistsGenerator.MakeWishlists(_juniors, _teamLeads);
 
+            //Assert
             foreach (TeamLead teamLead in _teamLeads)
             {
                 Assert.Contains(junior, teamLead.Wishlist);
@@ -71,8 +80,12 @@ namespace AllForTheHackathonTest
         [MemberData(nameof(DataForThirdTest))]
         public void MakeWishlists_TeamLeadShouldBeInTheJuniorsLists(TeamLead teamLead, List<Junior> _juniors, List<TeamLead> _teamLeads)
         {
+            //Arrange
+
+            //Act
             wishlistsGenerator.MakeWishlists(_juniors, _teamLeads);
 
+            //Assert
             foreach (Junior junior in _juniors)
             {
                 Assert.Contains(teamLead, junior.Wishlist);

@@ -1,5 +1,6 @@
-﻿using AllForTheHackathon.Strategies;
-namespace AllForTheHackathon
+﻿using AllForTheHackathon.Domain.Strategies;
+
+namespace AllForTheHackathon.Domain
 {
     public class HRManager
     {

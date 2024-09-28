@@ -1,4 +1,4 @@
-﻿namespace AllForTheHackathon
+﻿namespace AllForTheHackathon.Infrastructure
 {
     public interface IRegistrar
     {

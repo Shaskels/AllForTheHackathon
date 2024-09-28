@@ -1,4 +1,4 @@
-﻿using AllForTheHackathon;
+﻿using AllForTheHackathon.Domain;
 
 namespace AllForTheHackathonTests
 {
@@ -28,11 +28,16 @@ namespace AllForTheHackathonTests
         [MemberData(nameof(Data))]
         public void CalculateTheHarmonicMean_HarmonicMeanShouldBeAlwaysRight(List<Team> teams, decimal expected)
         {
+            //Arrange
             HRDirector hRDirector = new HRDirector();
+
+            //Act
             decimal res = hRDirector.CalculateTheHarmonicMean(teams);
+
+            //Assert
             Assert.Equal(expected, Math.Round(res, 4));
         }
 
-        
+
     }
 }

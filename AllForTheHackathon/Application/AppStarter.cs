@@ -1,10 +1,13 @@
 ﻿using Microsoft.Extensions.Hosting;
-using AllForTheHackathon.Exсeptions;
-using AllForTheHackathon.Employees;
+using Microsoft.Extensions.Options;
+using AllForTheHackathon.Domain.Employees;
+using AllForTheHackathon.Domain;
+using AllForTheHackathon.Infrastructure.IsSuccess;
+using AllForTheHackathon.Infrastructure;
 
-namespace AllForTheHackathon
+namespace AllForTheHackathon.Application
 {
-    public class AppStarter(HRDirector hrDirector, HRManager hrManager, IRegistrar registrar) : IHostedService
+    public class AppStarter(HRDirector hrDirector, HRManager hrManager, IRegistrar registrar, IOptions<Constants> consts) : IHostedService
     {
         private bool _running = true;
         public Task StartAsync(CancellationToken cancellationToken)
@@ -14,11 +17,12 @@ namespace AllForTheHackathon
         }
         public void RunAsync()
         {
+            Constants constants = consts.Value;
             List<Team> teams;
-            for (int i = 0; i < Constants.NumberOfHackathons; i++)
+            for (int i = 0; i < constants.NumberOfHackathons; i++)
             {
-                List<Junior> junior = registrar.RegisterParticipants<Junior>(Constants.FileWithJuniors);
-                List<TeamLead> teamLeads = registrar.RegisterParticipants<TeamLead>(Constants.FileWithTeamLeads);
+                List<Junior> junior = registrar.RegisterParticipants<Junior>(constants.FileWithJuniors);
+                List<TeamLead> teamLeads = registrar.RegisterParticipants<TeamLead>(constants.FileWithTeamLeads);
                 if (!IsRegistrationSuccess.IsSuccess)
                 {
                     Console.WriteLine("Registration failed");
@@ -41,7 +45,6 @@ namespace AllForTheHackathon
             }
             Console.WriteLine("Average Value: " + hrDirector.CalculateTheAverageValue());
         }
-
         public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System.Runtime.InteropServices;
-using AllForTheHackathon.Employees;
+using AllForTheHackathon.Domain.Employees;
 
-namespace AllForTheHackathon
+namespace AllForTheHackathon.Domain
 {
     public class RandomWishlistsGenerator : IWishlistsGenerator
     {

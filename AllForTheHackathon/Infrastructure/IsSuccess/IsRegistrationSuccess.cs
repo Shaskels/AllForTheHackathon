@@ -1,4 +1,4 @@
-﻿namespace AllForTheHackathon.Exсeptions
+﻿namespace AllForTheHackathon.Infrastructure.IsSuccess
 {
     public class IsRegistrationSuccess
     {
