@@ -1,6 +1,6 @@
 ﻿namespace AllForTheHackathon.Domain
 {
-    public class Constants
+    public class Settings
     {
         public int NumberOfHackathons { get; set; }
         public int NumberOfTeams { get; set; }

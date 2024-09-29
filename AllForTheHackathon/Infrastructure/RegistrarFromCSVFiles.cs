@@ -6,8 +6,8 @@ namespace AllForTheHackathon.Infrastructure
 {
     public class RegistrarFromCSVFiles : IRegistrar
     {
-        private Constants _constants;
-        public RegistrarFromCSVFiles(IOptions<Constants> consts)
+        private Settings _constants;
+        public RegistrarFromCSVFiles(IOptions<Settings> consts)
         {
             _constants = consts.Value;
         }

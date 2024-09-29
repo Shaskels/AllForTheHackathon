@@ -7,7 +7,7 @@ using AllForTheHackathon.Infrastructure;
 
 namespace AllForTheHackathon.Application
 {
-    public class AppStarter(HRDirector hrDirector, HRManager hrManager, IRegistrar registrar, IOptions<Constants> consts) : IHostedService
+    public class AppStarter(HRDirector hrDirector, HRManager hrManager, IRegistrar registrar, IOptions<Settings> consts) : IHostedService
     {
         private bool _running = true;
         public Task StartAsync(CancellationToken cancellationToken)
@@ -17,7 +17,7 @@ namespace AllForTheHackathon.Application
         }
         public void RunAsync()
         {
-            Constants constants = consts.Value;
+            Settings constants = consts.Value;
             List<Team> teams;
             for (int i = 0; i < constants.NumberOfHackathons; i++)
             {
