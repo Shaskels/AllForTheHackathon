@@ -1,6 +1,7 @@
 ﻿using AllForTheHackathon.Domain;
 using AllForTheHackathon.Domain.Strategies;
 using AllForTheHackathon.Infrastructure;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -17,7 +18,8 @@ namespace AllForTheHackathon.Application
             }).ConfigureServices((builder, services) =>
             {
                 services.AddHostedService<AppStarter>();
-                services.Configure<Constants>(builder.Configuration);
+                services.Configure<Settings>(builder.Configuration.GetSection("Settings"));
+                services.AddDbContext<ApplicationContext>(s => s.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
                 services.AddSingleton<ITeamBuildingStrategy, GaleShapleyStrategy>();
                 services.AddSingleton<IWishlistsGenerator, RandomWishlistsGenerator>();
                 services.AddSingleton<IRegistrar, RegistrarFromCSVFiles>();
