@@ -1,4 +1,4 @@
-﻿namespace AllForTheHackathon
+﻿namespace AllForTheHackathon.Domain.Strategies
 {
     enum Answers : byte
     {
