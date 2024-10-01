@@ -1,21 +1,21 @@
-﻿using AllForTheHackathon.Domain.Strategies;
+﻿using AllForTheHackathon.Domain.Employees;
+using AllForTheHackathon.Domain.Strategies;
+using AllForTheHackathon.Infrastructure;
 
 namespace AllForTheHackathon.Domain
 {
     public class HRManager
     {
-        private IWishlistsGenerator _wishlistsGenerator;
         private ITeamBuildingStrategy _buildingStrategy;
-        public HRManager(ITeamBuildingStrategy strategy, IWishlistsGenerator wishlistsGenerator)
+        public HRManager(ITeamBuildingStrategy strategy)
         {
-            _wishlistsGenerator = wishlistsGenerator;
             _buildingStrategy = strategy;
         }
 
-        public List<Team> HoldAHackathon(Hackathon hackathon)
+        public List<Team> HoldAHackathon(Hackathon hackathon, List<Junior> juniors, List<TeamLead> teamLeads,
+            List<Wishlist> juniorsWishlists, List<Wishlist> teamLeadsWishlists)
         {
-            _wishlistsGenerator.MakeWishlists(hackathon.Juniors, hackathon.TeamLeads);
-            return hackathon.Hold(_buildingStrategy);
+            return hackathon.Hold(_buildingStrategy, juniors, teamLeads, juniorsWishlists, teamLeadsWishlists);
         }
     }
 }

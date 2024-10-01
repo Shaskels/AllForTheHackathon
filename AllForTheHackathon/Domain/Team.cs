@@ -1,19 +1,19 @@
 ﻿using AllForTheHackathon.Domain.Employees;
-using System.Xml.Linq;
 
 namespace AllForTheHackathon.Domain
 {
     public class Team
     {
-        public Junior Junior { get; private set; }
-        public int SatisfactionOfJunior { get; private set; }
-        public TeamLead TeamLeader { get; private set; }
-        public int SatisfactionOfTeamLeader { get; private set; }
+        public int Id { get; set; }
+        public Employee? Junior { get; set; }
+        public int SatisfactionOfJunior { get; set; }
+        public Employee? TeamLeader { get; set; }
+        public int SatisfactionOfTeamLeader { get; set; }
+        public int HackathonId { get; set; }
+        public Hackathon? Hackathon { get; set; }
 
-        public Team(Junior junior, int satisfactionOfJunior, TeamLead teamLeader, int satisfactionOfTeamLeader)
+        public Team(int satisfactionOfJunior, int satisfactionOfTeamLeader)
         {
-            Junior = junior;
-            TeamLeader = teamLeader;
             SatisfactionOfJunior = satisfactionOfJunior;
             SatisfactionOfTeamLeader = satisfactionOfTeamLeader;
         }

@@ -2,18 +2,19 @@
 {
     public class Employee
     {
-        public int Id { get; private set; }
-        public string Name { get; private set; }
-
-        public Employee(int id, string name)
+        public int Id { get; set; }
+        public int IdInList { get; set; }
+        public string Name { get; set; }
+        public Wishlist? Wishlist { get; set; }
+        public Employee(int idInList, string name)
         {
-            Id = id;
+            IdInList = idInList;
             Name = name;
         }
 
         public override string ToString()
         {
-            return $"{Id.ToString(),-3}- {Name.ToString()}";
+            return $"{IdInList.ToString(),-3}- {Name.ToString()}";
         }
 
         public override bool Equals(object obj)
@@ -23,7 +24,7 @@
 
         public bool Equals(Employee other)
         {
-            if (other != null && Id == other.Id && Name == other.Name)
+            if (other != null && IdInList == other.IdInList && Name == other.Name)
                 return true;
             return false;
         }

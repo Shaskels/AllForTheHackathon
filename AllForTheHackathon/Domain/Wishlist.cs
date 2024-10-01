@@ -1,16 +1,19 @@
 ﻿using AllForTheHackathon.Domain.Employees;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AllForTheHackathon.Domain
 {
     public class Wishlist
     {
-        public int Id { get; private set; }
-        public List<int> Employees { get; private set; }
+        public int Id { get; set; }
+        public int EmployeeId { get; set; }
+        public Employee? Employee { get; set; }
 
-        public Wishlist(int id, List<int> employees)
+        [NotMapped]
+        public List<Employee> Employees { get; private set; } = new();
+        public Wishlist()
         {
-            Id = id;
-            Employees = employees;
         }
     }
 }

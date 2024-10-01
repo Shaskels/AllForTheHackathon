@@ -4,6 +4,7 @@ namespace AllForTheHackathon.Domain
 {
     public interface IWishlistsGenerator
     {
-        public void MakeWishlists(List<Junior> juniors, List<TeamLead> teamLeads);
+        public List<Wishlist> MakeWishlistsForJuniors(List<Junior> juniors, List<TeamLead> teamLeads);
+        public List<Wishlist> MakeWishlistsForTeamLeads(List<Junior> juniors, List<TeamLead> teamLeads);
     }
 }

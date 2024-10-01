@@ -19,7 +19,7 @@ namespace AllForTheHackathon.Application
             {
                 services.AddHostedService<AppStarter>();
                 services.Configure<Settings>(builder.Configuration.GetSection("Settings"));
-                services.AddDbContext<ApplicationContext>(s => s.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+                services.AddDbContext<ApplicationContext>(s => s.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")), ServiceLifetime.Singleton);
                 services.AddSingleton<ITeamBuildingStrategy, GaleShapleyStrategy>();
                 services.AddSingleton<IWishlistsGenerator, RandomWishlistsGenerator>();
                 services.AddSingleton<IRegistrar, RegistrarFromCSVFiles>();

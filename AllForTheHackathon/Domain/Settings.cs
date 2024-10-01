@@ -6,5 +6,7 @@
         public int NumberOfTeams { get; set; }
         public string FileWithJuniors { get; set; } = string.Empty;
         public string FileWithTeamLeads { get; set; } = string.Empty;
+        public string Mode { get; set; } = string.Empty;
+        public int HackathonId { get; set; }
     }
 }

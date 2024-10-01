@@ -1,15 +1,12 @@
-﻿namespace AllForTheHackathon.Domain.Employees
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace AllForTheHackathon.Domain.Employees
 {
+    [Table("Junior")]
     public class Junior : Employee
     {
-        public List<TeamLead> Wishlist { get; private set; } = new List<TeamLead>();
-        public Junior(int id, string name) : base(id, name)
+        public Junior(int idInList, string name) : base(idInList,name)
         {
-        }
-
-        public Junior(int id, string name, List<TeamLead> teamLeads) : base(id, name)
-        {
-            Wishlist = teamLeads;
         }
     }
 }
