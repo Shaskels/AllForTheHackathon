@@ -16,6 +16,7 @@ namespace AllForTheHackathon.Application
             Task.Run(RunAsync);
             return Task.CompletedTask;
         }
+
         public void RunAsync()
         {
             Settings settings = options.Value;
@@ -77,6 +78,7 @@ namespace AllForTheHackathon.Application
                 Console.WriteLine(hackathon);
             }
         }
+
         private void AverageForAllHackathons()
         {
             List<Hackathon> hackathons = context.Hackathons.ToList();
