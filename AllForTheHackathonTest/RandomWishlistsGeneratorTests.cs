@@ -13,10 +13,10 @@ namespace AllForTheHackathonTest
                                                      new Junior(4, "Рябинин Александр"),
                                                      new Junior(5, "Ильин Тимофей")};
         private static List<TeamLead> teamLeadList = new List<TeamLead> { new TeamLead(1, "Филиппова Ульяна"),
-                                                             new TeamLead(2, "Николаев Григорий"),
-                                                             new TeamLead(3, "Андреева Вероника"),
-                                                             new TeamLead(4, "Коротков Михаил"),
-                                                             new TeamLead(5, "Кузнецов Александр") };
+                                                     new TeamLead(2, "Николаев Григорий"),
+                                                     new TeamLead(3, "Андреева Вероника"),
+                                                     new TeamLead(4, "Коротков Михаил"),
+                                                     new TeamLead(5, "Кузнецов Александр") };
 
         public RandomWishlistsGeneratorTests()
         {
