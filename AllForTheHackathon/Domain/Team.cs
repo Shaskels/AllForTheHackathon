@@ -18,6 +18,14 @@ namespace AllForTheHackathon.Domain
             SatisfactionOfTeamLeader = satisfactionOfTeamLeader;
         }
 
+        public Team(Employee junior, int satisfactionOfJunior, Employee teamLead, int satisfactionOfTeamLeader) 
+        {
+            Junior = junior;
+            SatisfactionOfJunior= satisfactionOfJunior;
+            TeamLeader = teamLead;
+            SatisfactionOfTeamLeader= satisfactionOfTeamLeader;
+        }
+
         public override string ToString()
         {
             return $"{Junior.ToString(),-25}{SatisfactionOfJunior.ToString(),-4}{TeamLeader.ToString(),-25}{SatisfactionOfTeamLeader.ToString()}";

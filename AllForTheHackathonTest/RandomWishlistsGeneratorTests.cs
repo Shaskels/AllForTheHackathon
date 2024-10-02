@@ -29,68 +29,69 @@ namespace AllForTheHackathonTest
 
         public static IEnumerable<object[]> DataForSecondTest()
         {
-            yield return new object[] { new Junior(1, "Юдин Адам"), juniorList, teamLeadList};
-            yield return new object[] { new Junior(5, "Ильин Тимофей"), juniorList, teamLeadList };
+            yield return new object[] { new Employee(1, "Юдин Адам"), juniorList, teamLeadList};
+            yield return new object[] { new Employee(5, "Ильин Тимофей"), juniorList, teamLeadList };
         }
         public static IEnumerable<object[]> DataForThirdTest()
         {
-            yield return new object[] { new TeamLead(1, "Филиппова Ульяна"), juniorList, teamLeadList };
-            yield return new object[] { new TeamLead(5, "Кузнецов Александр"), juniorList, teamLeadList };
+            yield return new object[] { new Employee(1, "Филиппова Ульяна"), juniorList, teamLeadList };
+            yield return new object[] { new Employee(5, "Кузнецов Александр"), juniorList, teamLeadList };
         }
 
-        //[Theory]
-        //[MemberData(nameof(DataForFirstTest))]
-        //public void MakeWishlists_SizeOfTheListShouldMatchTheNumberOfTeamMembers(List<Junior> _juniors, List<TeamLead> _teamLeads)
-        //{
-        //    //Arrange
+        [Theory]
+        [MemberData(nameof(DataForFirstTest))]
+        public void MakeWishlists_SizeOfTheListShouldMatchTheNumberOfTeamMembers(List<Junior> juniors, List<TeamLead> teamLeads)
+        {
+            //Arrange
 
-        //    //Act
-        //    wishlistsGenerator.MakeWishlists(_juniors, _teamLeads);
+            //Act
+            List<Wishlist> juniorsWishlists = wishlistsGenerator.MakeWishlistsForJuniors(juniors, teamLeads);
+            List<Wishlist> teamLeadsWishlists = wishlistsGenerator.MakeWishlistsForTeamLeads(juniors, teamLeads);
 
-        //    //Assert
-        //    int expectedJuniorsCount = _juniors.Count;
-        //    int expectedTeamLeadsCount = _teamLeads.Count;
-        //    foreach (Junior junior in _juniors)
-        //    {
-        //        Assert.Equal(expectedTeamLeadsCount, junior.Wishlist.Count);
-        //    }
-        //    foreach (TeamLead teamLead in _teamLeads)
-        //    {
-        //        Assert.Equal(expectedJuniorsCount, teamLead.Wishlist.Count);
-        //    }
-        //}
+            //Assert
+            int expectedJuniorsCount = juniors.Count;
+            int expectedTeamLeadsCount = teamLeads.Count;
+            foreach (Wishlist wishlist in juniorsWishlists)
+            {
+                Assert.Equal(expectedTeamLeadsCount, wishlist.Employees.Count);
+            }
+            foreach (Wishlist wishlist in teamLeadsWishlists)
+            {
+                Assert.Equal(expectedJuniorsCount, wishlist.Employees.Count);
+            }
+        }
 
-        //[Theory]
-        //[MemberData(nameof(DataForSecondTest))]
-        //public void MakeWishlists_JuniorShouldBeInTheTeamLeadsLists(Junior junior, List<Junior> _juniors, List<TeamLead> _teamLeads)
-        //{
-        //    //Arrange
+        [Theory]
+        [MemberData(nameof(DataForSecondTest))]
+        public void MakeWishlists_JuniorShouldBeInTheTeamLeadsLists(Employee junior, List<Junior> juniors, List<TeamLead> teamLeads)
+        {
+            //Arrange
 
-        //    //Act
-        //    wishlistsGenerator.MakeWishlists(_juniors, _teamLeads);
+            //Act
+            List<Wishlist> teamLeadsWishlists = wishlistsGenerator.MakeWishlistsForTeamLeads(juniors, teamLeads);
 
-        //    //Assert
-        //    foreach (TeamLead teamLead in _teamLeads)
-        //    {
-        //        Assert.Contains(junior, teamLead.Wishlist);
-        //    }
-        //}
+            //Assert
+            foreach (Wishlist wishlist in teamLeadsWishlists)
+            {
+                Assert.Contains(junior, wishlist.Employees);
+            }
+        }
 
-        //[Theory]
-        //[MemberData(nameof(DataForThirdTest))]
-        //public void MakeWishlists_TeamLeadShouldBeInTheJuniorsLists(TeamLead teamLead, List<Junior> _juniors, List<TeamLead> _teamLeads)
-        //{
-        //    //Arrange
+        [Theory]
+        [MemberData(nameof(DataForThirdTest))]
+        public void MakeWishlists_TeamLeadShouldBeInTheJuniorsLists(Employee teamLead, List<Junior> juniors, List<TeamLead> teamLeads)
+        {
+            //Arrange
 
-        //    //Act
-        //    wishlistsGenerator.MakeWishlists(_juniors, _teamLeads);
+            //Act
+            List<Wishlist> juniorsWishlists = wishlistsGenerator.MakeWishlistsForJuniors(juniors, teamLeads);
 
-        //    //Assert
-        //    foreach (Junior junior in _juniors)
-        //    {
-        //        Assert.Contains(teamLead, junior.Wishlist);
-        //    }
-        //}
+            //Assert
+            foreach (Wishlist wishlist in juniorsWishlists)
+            {
+                Assert.Contains(teamLead, wishlist.Employees);
+            }
+        }
 
 
     }

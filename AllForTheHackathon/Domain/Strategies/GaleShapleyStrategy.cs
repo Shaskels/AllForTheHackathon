@@ -98,10 +98,8 @@ namespace AllForTheHackathon.Domain.Strategies
                 {
                     if (_dictForLeads.TryGetValue(teamLeads[JunData.IndOfBests].IdInList, out TeamLeadsData? LeadData))
                     {
-                        var team = new Team(teamLeads.Count - JunData.IndOfBests,
+                        var team = new Team(junior, teamLeads.Count - JunData.IndOfBests, JunData.Favorite,
                             juniors.Count - LeadData.IndOfBests);
-                        team.Junior = junior;
-                        team.TeamLeader = JunData.Favorite;
                         teams.Add(team);
                     }
                 }

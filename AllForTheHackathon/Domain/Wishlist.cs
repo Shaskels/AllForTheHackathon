@@ -15,5 +15,9 @@ namespace AllForTheHackathon.Domain
         public Wishlist()
         {
         }
+        public Wishlist(List<Employee> employees)
+        {
+            Employees = employees;
+        }
     }
 }
