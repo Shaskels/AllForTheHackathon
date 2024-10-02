@@ -92,12 +92,12 @@ namespace AllForTheHackathonTests
                                                 new Junior(5, "")
                                             }),
 
-            }, 3.0457M};
+            }, 3.0457};
         }
 
         [Theory]
         [MemberData(nameof(Data))]
-        public void Hold_HarmonicMeanShouldMatchExpected(List<Junior> juniors, List<TeamLead> teamLeads, decimal expected)
+        public void Hold_HarmonicMeanShouldMatchExpected(List<Junior> juniors, List<TeamLead> teamLeads, double expected)
         {
             //Arrange
             Hackathon hackathon = new Hackathon(juniors, teamLeads);
