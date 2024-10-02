@@ -20,5 +20,26 @@ namespace AllForTheHackathon.Domain
         {
             return strategy.BuildTeams(juniors, teamLeads, juniorsWishlists, teamLeadsWishlists);
         }
+
+        public override string ToString()
+        {
+            string result = "Juniors:\n";
+            foreach (var junior in Juniors)
+            {
+                result += junior.ToString() + "\n";
+            }
+            result += "TeamLeads:\n";
+            foreach (var teamLead in TeamLeads)
+            {
+                result += teamLead.ToString() + "\n";
+            }
+            result += "Teams:\n";
+            foreach(var team in Teams)
+            {
+                result += team.ToString() + "\n";
+            }
+            result += "Harmonic mean:" + Result.ToString();
+            return result;
+        }
     }
 }
