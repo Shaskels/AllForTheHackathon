@@ -173,9 +173,10 @@ namespace AllForTheHackathonTests
         {
             //Arrange
             Hackathon hackathon = new Hackathon();
+            HRManager hRManager = new HRManager(strategy);
 
             //Act
-            List<Team> teams = hackathon.Hold(strategy, juniors, teamLeads, juniorsWishlists, teamLeadsWishlists);
+            List<Team> teams = hRManager.HoldAHackathon(hackathon, juniors, teamLeads, juniorsWishlists, teamLeadsWishlists);
 
             //Assert
             Assert.Equal(expectedTeams, teams);
