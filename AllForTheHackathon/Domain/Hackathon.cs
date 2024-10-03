@@ -8,7 +8,7 @@ namespace AllForTheHackathon.Domain
         public int Id { get; set; }
         public List<Junior> Juniors { get; set; } = new();
         public List<TeamLead> TeamLeads { get; set; } = new();
-        public decimal Result { get; set; }
+        public double Result { get; set; }
         public List<Team> Teams { get; set; } = new();
 
         public Hackathon()

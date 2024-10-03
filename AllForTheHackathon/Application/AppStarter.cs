@@ -60,7 +60,7 @@ namespace AllForTheHackathon.Application
             {
                 Console.WriteLine(team);
             }
-            decimal harmonicMean = hrDirector.CalculateTheHarmonicMean(teams);
+            double harmonicMean = hrDirector.CalculateTheHarmonicMean(teams);
 
             DBSaver dBSaver = new DBSaver();
             dBSaver.SaveAllData(context, hackathon, harmonicMean, juniors, teamLeads,
@@ -82,14 +82,11 @@ namespace AllForTheHackathon.Application
         private void AverageForAllHackathons()
         {
             List<Hackathon> hackathons = context.Hackathons.ToList();
-            decimal sum = 0;
-            foreach (Hackathon hackathon in hackathons)
-            {
-                sum += hackathon.Result;
-            }
+            double average = hrDirector.CalculateTheAverageValue(hackathons);
             Console.WriteLine($"{hackathons.Count} hackathons found");
-            Console.WriteLine($"Average mean: {sum / hackathons.Count}");
+            Console.WriteLine($"Average mean: {average}");
         }
+
         public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;
     }
 }

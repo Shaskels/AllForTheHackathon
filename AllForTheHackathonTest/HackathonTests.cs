@@ -81,13 +81,13 @@ namespace AllForTheHackathonTests
                                                 new Junior(4, ""),
                                                 new Junior(5, "")}),
             },
-                3.0457M};
+                3.0457};
         }
 
         [Theory]
         [MemberData(nameof(Data))]
         public void Hold_HarmonicMeanShouldMatchExpected(List<Junior> juniors, List<TeamLead> teamLeads,
-            List<Wishlist> juniorsWishlists, List<Wishlist> teamLeadsWishlists, decimal expected)
+            List<Wishlist> juniorsWishlists, List<Wishlist> teamLeadsWishlists, double expected)
         {
             //Arrange
             Hackathon hackathon = new Hackathon();
