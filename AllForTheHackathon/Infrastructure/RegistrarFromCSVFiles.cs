@@ -42,7 +42,6 @@ namespace AllForTheHackathon.Infrastructure
                 }
             }
         }
-
         public List<T> RegisterParticipants<T>(string fileName)
         {
             List<T> participants = new List<T>();
