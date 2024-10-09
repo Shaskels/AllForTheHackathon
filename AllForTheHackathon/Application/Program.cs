@@ -14,7 +14,7 @@ namespace AllForTheHackathon.Application
         {
             var host = Host.CreateDefaultBuilder(args).ConfigureHostConfiguration(options =>
             {
-                options.AddJsonFile("./Resources/appsettings.json");
+                options.AddJsonFile("./appsettings.json");
             }).ConfigureServices((builder, services) =>
             {
                 services.AddHostedService<AppStarter>();

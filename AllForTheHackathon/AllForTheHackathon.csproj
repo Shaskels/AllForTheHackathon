@@ -20,9 +20,6 @@
     <None Update="hackathonapp.db">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Resources\appsettings.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Update="Resources\Juniors20.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
