@@ -9,7 +9,6 @@ namespace AllForTheHackathon.Domain
         public int Id { get; set; }
         public int EmployeeId { get; set; }
         public Employee? Employee { get; set; }
-
         [NotMapped]
         public List<Employee> Employees { get; private set; } = new();
         public Wishlist()

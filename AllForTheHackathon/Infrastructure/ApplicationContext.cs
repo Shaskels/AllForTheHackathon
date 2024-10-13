@@ -12,7 +12,7 @@ namespace AllForTheHackathon.Infrastructure
         public DbSet<Hackathon> Hackathons { get; set; } = null!;
         public DbSet<Wishlist> Wishlist { get; set; } = null!;
         public DbSet<EmployeeInWishlist> EmployeesInWishlists { get; set; } = null!;
-        
+
         public ApplicationContext(DbContextOptions<ApplicationContext> options)
                 : base(options)
         {

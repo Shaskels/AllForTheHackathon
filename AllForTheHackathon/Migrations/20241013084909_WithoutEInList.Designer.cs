@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AllForTheHackathon.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20241002075903_Try")]
-    partial class Try
+    [Migration("20241013084909_WithoutEInList")]
+    partial class WithoutEInList
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,35 +33,16 @@ namespace AllForTheHackathon.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<int?>("WishlistId")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("WishlistId");
 
                     b.ToTable("Employees");
 
                     b.UseTptMappingStrategy();
-                });
-
-            modelBuilder.Entity("AllForTheHackathon.Domain.Employees.EmployeeInWishlist", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("EmployeeId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("PositionInList")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("WishlistId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EmployeeId");
-
-                    b.HasIndex("WishlistId");
-
-                    b.ToTable("EmployeesInWishlists");
                 });
 
             modelBuilder.Entity("AllForTheHackathon.Domain.Hackathon", b =>
@@ -70,8 +51,8 @@ namespace AllForTheHackathon.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<decimal>("Result")
-                        .HasColumnType("TEXT");
+                    b.Property<double>("Result")
+                        .HasColumnType("REAL");
 
                     b.HasKey("Id");
 
@@ -121,8 +102,7 @@ namespace AllForTheHackathon.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EmployeeId")
-                        .IsUnique();
+                    b.HasIndex("EmployeeId");
 
                     b.ToTable("Wishlist");
                 });
@@ -151,23 +131,11 @@ namespace AllForTheHackathon.Migrations
                     b.ToTable("TeamLead");
                 });
 
-            modelBuilder.Entity("AllForTheHackathon.Domain.Employees.EmployeeInWishlist", b =>
+            modelBuilder.Entity("AllForTheHackathon.Domain.Employees.Employee", b =>
                 {
-                    b.HasOne("AllForTheHackathon.Domain.Employees.Employee", "Employee")
-                        .WithMany()
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("AllForTheHackathon.Domain.Wishlist", "Wishlist")
-                        .WithMany()
-                        .HasForeignKey("WishlistId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Employee");
-
-                    b.Navigation("Wishlist");
+                    b.HasOne("AllForTheHackathon.Domain.Wishlist", null)
+                        .WithMany("Employees")
+                        .HasForeignKey("WishlistId");
                 });
 
             modelBuilder.Entity("AllForTheHackathon.Domain.Team", b =>
@@ -196,8 +164,8 @@ namespace AllForTheHackathon.Migrations
             modelBuilder.Entity("AllForTheHackathon.Domain.Wishlist", b =>
                 {
                     b.HasOne("AllForTheHackathon.Domain.Employees.Employee", "Employee")
-                        .WithOne("Wishlist")
-                        .HasForeignKey("AllForTheHackathon.Domain.Wishlist", "EmployeeId")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -230,11 +198,6 @@ namespace AllForTheHackathon.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("AllForTheHackathon.Domain.Employees.Employee", b =>
-                {
-                    b.Navigation("Wishlist");
-                });
-
             modelBuilder.Entity("AllForTheHackathon.Domain.Hackathon", b =>
                 {
                     b.Navigation("Juniors");
@@ -242,6 +205,11 @@ namespace AllForTheHackathon.Migrations
                     b.Navigation("TeamLeads");
 
                     b.Navigation("Teams");
+                });
+
+            modelBuilder.Entity("AllForTheHackathon.Domain.Wishlist", b =>
+                {
+                    b.Navigation("Employees");
                 });
 #pragma warning restore 612, 618
         }

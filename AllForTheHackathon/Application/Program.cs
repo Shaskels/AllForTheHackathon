@@ -22,10 +22,14 @@ namespace AllForTheHackathon.Application
                 services.AddDbContext<ApplicationContext>(s => s.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")), ServiceLifetime.Singleton);
                 services.AddSingleton<ITeamBuildingStrategy, GaleShapleyStrategy>();
                 services.AddSingleton<IWishlistsGenerator, RandomWishlistsGenerator>();
+                services.AddSingleton<ISaver, DBSaver>();
                 services.AddSingleton<IRegistrar, RegistrarFromCSVFiles>();
                 services.AddTransient<Hackathon>();
                 services.AddSingleton<HRManager>();
                 services.AddSingleton<HRDirector>();
+                services.AddSingleton<OneHackathonHolder>();
+                services.AddSingleton<HackathonWriter>();
+                services.AddSingleton<AverageCalculator>();
             }).Build();
             host.Run();
         }

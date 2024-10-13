@@ -3,17 +3,23 @@ using AllForTheHackathon.Domain.Employees;
 
 namespace AllForTheHackathon.Infrastructure
 {
-    public class DBSaver
+    public class DBSaver : ISaver
     {
-        public void SaveAllData(ApplicationContext context, Hackathon hackathon, double result, List<Junior> juniors, List<TeamLead> teamLeads,
-            List<Wishlist> juniorsWishlists, List<Wishlist> teamLeadsWishlists, List<Team> teams)
+        private ApplicationContext _context;
+        public DBSaver(ApplicationContext context) 
         {
-            context.Juniors.AddRange(juniors);
-            context.TeamLeads.AddRange(teamLeads);
-            context.SaveChanges();
-
-            context.Wishlist.AddRange(juniorsWishlists);
-            context.Wishlist.AddRange(teamLeadsWishlists);
+            _context = context;
+        }
+        public void SaveEmployees(List<Junior> juniors, List<TeamLead> teamLeads)
+        {
+            _context.Juniors.AddRange(juniors);
+            _context.TeamLeads.AddRange(teamLeads);
+            _context.SaveChanges();
+        }
+        public void SaveWishlists(List<Wishlist> juniorsWishlists, List<Wishlist> teamLeadsWishlists)
+        {
+            _context.Wishlist.AddRange(juniorsWishlists);
+            _context.Wishlist.AddRange(teamLeadsWishlists);
 
             for (int j = 0; j < juniorsWishlists.Count; j++)
             {
@@ -27,17 +33,16 @@ namespace AllForTheHackathon.Infrastructure
                     juniorInWishlist.Wishlist = teamLeadsWishlists[j];
                     teamLeadInWishlist.PositionInList = k;
                     juniorInWishlist.PositionInList = k;
-                    context.Add(teamLeadInWishlist);
+                    _context.Add(teamLeadInWishlist);
+                    _context.Add(juniorInWishlist);
                 }
             }
-
-            hackathon.TeamLeads = teamLeads;
-            hackathon.Juniors = juniors;
-            hackathon.Result = result;
-            hackathon.Teams = teams;
-            context.Hackathons.Add(hackathon);
-
-            context.SaveChanges();
+            _context.SaveChanges();
+        }
+        public void SaveHackathon(Hackathon hackathon)
+        {
+            _context.Hackathons.Add(hackathon);
+            _context.SaveChanges();
         }
     }
 }

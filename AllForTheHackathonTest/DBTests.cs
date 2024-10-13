@@ -1,42 +1,43 @@
-﻿using AllForTheHackathon.Domain;
+﻿using AllForTheHackathon.Application;
+using AllForTheHackathon.Domain;
 using AllForTheHackathon.Domain.Employees;
+using AllForTheHackathon.Domain.Strategies;
+using AllForTheHackathon.Infrastructure;
+using Microsoft.EntityFrameworkCore;
 
 namespace AllForTheHackathonTests
 {
     public class DBTests
     {
         [Fact]
-        public void Task_Add_Without_Relation()
+        public void Add_Without_Relation()
         {
             // Arrange
             var factory = new ConnectionFactory();
-            var context = factory.CreateContextForSQLite();
+            var context = factory.CreateNewContextForSQLite();
+            ISaver saver = new DBSaver(context);
             var hackathon = new Hackathon() { Result = 5 };
 
             //Act
-            var data = context.Hackathons.Add(hackathon);
+            saver.SaveHackathon(hackathon);
             context.SaveChanges();
 
             //Assert
             var hackathonsCount = context.Hackathons.Count();
-            if (hackathonsCount != 0)
-            {
-                Assert.Equal(1, hackathonsCount);
-            }
+            Assert.Equal(1, hackathonsCount);
 
             var singleHackathon = context.Hackathons.FirstOrDefault();
-            if (singleHackathon != null)
-            {
-                Assert.Equal(5, singleHackathon.Result);
-            }
+            Assert.Equal(5, singleHackathon.Result);
+
         }
 
         [Fact]
-        public void Task_Add_With_Relation()
+        public void Add_With_Relation()
         {
             // Arrange
             var factory = new ConnectionFactory();
-            var context = factory.CreateContextForSQLite();
+            var context = factory.CreateNewContextForSQLite();
+            ISaver saver = new DBSaver(context);
             var juniors = new List<Junior> { new Junior(1, "Юдин Адам") };
             var teamLeads = new List<TeamLead> { new TeamLead(1, "Филиппова Ульяна") };
             var teams = new List<Team> { new Team(juniors[0], 1, teamLeads[0], 1) };
@@ -44,24 +45,51 @@ namespace AllForTheHackathonTests
                 Teams = teams, Result = 5 };
 
             //Act
-            var data = context.Hackathons.Add(hackathon);
+            saver.SaveHackathon(hackathon);
             context.SaveChanges();
 
             //Assert
             var hackathonsCount = context.Hackathons.Count();
-            if (hackathonsCount != 0)
-            {
-                Assert.Equal(1, hackathonsCount);
-            }
+            Assert.Equal(1, hackathonsCount);
 
             var singleHackathon = context.Hackathons.FirstOrDefault();
-            if (singleHackathon != null)
+            Assert.Equal(5, singleHackathon.Result);
+            Assert.Equal(juniors, singleHackathon.Juniors);
+            Assert.Equal(teamLeads, singleHackathon.TeamLeads);
+            Assert.Equal(teams, singleHackathon.Teams);
+        }
+
+        [Fact]
+        public void Read_Hackathon_From_BD()
+        {
+            // Arrange
+            var factory = new ConnectionFactory();
+            var context = factory.CreateNewContextForSQLite();
+            ISaver saver = new DBSaver(context);
+            var juniors = new List<Junior> { new Junior(1, "Юдин Адам") };
+            var teamLeads = new List<TeamLead> { new TeamLead(1, "Филиппова Ульяна") };
+            var teams = new List<Team> { new Team(juniors[0], 1, teamLeads[0], 1) };
+            var hackathon = new Hackathon()
             {
-                Assert.Equal(5, singleHackathon.Result);
-                Assert.Equal(juniors, singleHackathon.Juniors);
-                Assert.Equal(teamLeads, singleHackathon.TeamLeads);
-                Assert.Equal(teams, singleHackathon.Teams);
-            }
+                Juniors = juniors,
+                TeamLeads = teamLeads,
+                Teams = teams,
+                Result = 5
+            };
+
+            //Act
+            saver.SaveHackathon(hackathon);
+            context.SaveChanges();
+
+            //Assert
+            var hackathonsCount = context.Hackathons.Count();
+            Assert.Equal(1, hackathonsCount);
+
+            var singleHackathon = context.Hackathons.Find(1);
+            Assert.Equal(5, singleHackathon.Result);
+            Assert.Equal(juniors, singleHackathon.Juniors);
+            Assert.Equal(teamLeads, singleHackathon.TeamLeads);
+            Assert.Equal(teams, singleHackathon.Teams);
         }
 
         [Fact]
@@ -70,7 +98,7 @@ namespace AllForTheHackathonTests
             // Arrange
             var factory = new ConnectionFactory();
             var hrDirector = new HRDirector();
-            var context = factory.CreateContextForSQLite();
+            var context = factory.CreateNewContextForSQLite();
             var hackathon1 = new Hackathon(){ Result = 5 };
             var hackathon2 = new Hackathon(){ Result = 3 };
             var hackathon3 = new Hackathon(){ Result = 4 };
@@ -85,8 +113,8 @@ namespace AllForTheHackathonTests
             context.SaveChanges();
 
             //Act
-            var hackathons = context.Hackathons.ToList();
-            var res = hrDirector.CalculateTheAverageValue(hackathons);
+            List<Hackathon> hackathons = context.Hackathons.ToList();
+            double res = hrDirector.CalculateTheAverageValue(hackathons);
 
             //Assert
             Assert.Equal(expected, res);
