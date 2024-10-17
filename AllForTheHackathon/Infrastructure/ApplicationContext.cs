@@ -18,5 +18,18 @@ namespace AllForTheHackathon.Infrastructure
         {
             Database.EnsureCreated();
         }
+
+        //protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //{
+        //    modelBuilder
+        //        .Entity<Employee>()
+        //        .HasOne(e => e.Wishlist)
+        //        .WithOne(w => w.Employee)
+        //        .HasForeignKey<Wishlist>(w => w.EmployeeId);
+        //    modelBuilder.Entity<Wishlist>()
+        //        .HasMany(w => w.Employees)
+        //        .WithMany(e => e.Wishlists)
+        //        .UsingEntity(j => j.ToTable("dlsa;ld;a"));
+        //}
     }
 }
