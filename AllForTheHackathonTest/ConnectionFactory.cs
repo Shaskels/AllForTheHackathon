@@ -31,6 +31,7 @@ namespace AllForTheHackathonTests
             if (context != null) 
             {
                 context.Database.EnsureCreated();
+                context.Database.EnsureCreated();
             }
 
             return context;

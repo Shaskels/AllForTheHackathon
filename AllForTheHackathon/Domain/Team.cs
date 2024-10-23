@@ -12,6 +12,11 @@ namespace AllForTheHackathon.Domain
         public int HackathonId { get; set; }
         public Hackathon? Hackathon { get; set; }
 
+        public Team()
+        {
+
+        }
+
         public Team(int satisfactionOfJunior, int satisfactionOfTeamLeader)
         {
             SatisfactionOfJunior = satisfactionOfJunior;

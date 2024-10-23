@@ -31,7 +31,6 @@ namespace AllForTheHackathonTests
 
             var singleHackathon = _context.Hackathons.Find(2);
             Assert.Equal(5, singleHackathon.Result);
-
         }
 
         [Fact]
@@ -115,7 +114,6 @@ namespace AllForTheHackathonTests
 
             //Assert
             Assert.Equal(expected, res);
-
         }
     }
 }

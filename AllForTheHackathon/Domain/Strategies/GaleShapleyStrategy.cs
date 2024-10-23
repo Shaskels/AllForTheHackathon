@@ -1,5 +1,4 @@
 ﻿using AllForTheHackathon.Domain.Employees;
-using Microsoft.Extensions.Options;
 
 namespace AllForTheHackathon.Domain.Strategies
 {
